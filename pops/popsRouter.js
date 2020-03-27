@@ -4,29 +4,31 @@ const Pops = require('./popsModel.js');
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
+router.get('/pop', (req, res) => {
     Pops.find()
-        .then((pops) => {
-            res.json(pops);
+        .then(pops => {
+            res.status(200).json(pops);
         })
         .catch(err => {
-            res.status(500).json({ errorMessage: 'Could not grab pops' });
+            // console.log(res);
+            res.status(500).json({ errorMessage: 'Could not grab pops', err });
         });
 });
 
-router.post('/', (req, res) => {
+router.post('/pop', (req, res) => {
     const data = req.body;
 
     Pops.add(data)
-        .then((res) => {
-            res.status(201).json(res)
+        .then((add) => {
+            res.status(201).json(add)
         })
         .catch((err) => {
+            console.log(err);
             res.status(500).json({ errorMessage: 'Failed to add that pop.'})
         })
 })
 
-router.delete('/:id', (req, res) => {
+router.delete('/pop/:id', (req, res) => {
     const { id } = req.params;
 
     Pops.remove(id)

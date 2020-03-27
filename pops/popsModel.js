@@ -1,14 +1,14 @@
 const db = require('../data/dbConfig.js');
 
 module.exports = {
-    remove,
     add,
+    remove,
     find,
     findById
 };
 
 function add(data) {
-    return db(data)
+    return db('pops')
         .insert(data, 'id')
         .then((res) => {
             return findById(res[0]);
@@ -22,7 +22,7 @@ function remove(id) {
 }
 
 function find() {
-    return db('pops')
+    return db('pops');
 }
 
 function findById(id) {

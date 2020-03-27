@@ -7,9 +7,9 @@ const server = express();
 server.use(express.json());
 
 server.get('/', (req, res) => {
-    res.send('<h1> The API is running! </h1>');
+    res.status(200).json({ message: 'Welcome!'});
 });
 
-server.use('/pop', popRouter);
+server.use('/api', popRouter);
 
 module.exports = server;
